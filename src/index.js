@@ -28,9 +28,16 @@ for (let el of localStore) {
 
 //creating basket
 const basket = document.createElement('div');
-basket.innerHTML = '<h2>Basket</h2>';
 basket.classList.add('basket');
-app.append(basket);
+app.insertAdjacentElement('beforeend', basket);
+const basketTittle = document.createElement('h2');
+basketTittle.innerText = 'Basket';
+basket.insertAdjacentElement('afterbegin', basketTittle);
+
+const sumPriceBusket = document.createElement('p');
+sumPriceBusket.innerText = '0';
+sumPriceBusket.classList.add('sum_price_busket')
+basketTittle.after(sumPriceBusket);
 
 
 

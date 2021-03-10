@@ -29,11 +29,13 @@ export default class StoreProduct extends Good{
       good.createCard();
 
       this.card.append(this.minusBtn);
+      good.changeTotalPrice();
     } else {
       basket.products.forEach(el => {
         if (el.id === this.id) {
           el.quantity++;
           el.changeQuantity();
+          el.changeTotalPrice();
         }
       })
     }  
@@ -49,12 +51,12 @@ export default class StoreProduct extends Good{
              if (el.id === this.id) {
                basket.products.splice(i, 1);
              }
+            el.changeTotalPrice();
            });
-           console.log(basket.products);
           } else {
             el.quantity--;
             el.changeQuantity();
-            console.log(basket.products);
+            el.changeTotalPrice();
           }
         }
     })

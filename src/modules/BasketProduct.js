@@ -7,6 +7,7 @@ export default class BasketProduct extends Good {
     this.quantity = 1;
     this.card = document.createElement('div');
     this.basketElement = document.querySelector('.basket');
+    this.totalPrice = document.querySelector('.sum_price_busket');
   }
   createCard() {
     this.card.innerHTML = `<h3>${this.name}</h3> <span>${this.price}</span> <strong id="price">${this.quantity}</strong>`;
@@ -18,6 +19,10 @@ export default class BasketProduct extends Good {
     price.innerHTML = this.quantity;
   }
   removeCard() {
-    this.card.innerHTML = '';
+    this.card.remove();
+  }
+  changeTotalPrice() {
+    const prices = basket.products.map(el => el.price * el.quantity);
+    this.totalPrice.innerText = prices.reduce((acc, curr) => acc + curr, 0);
   }
 }
