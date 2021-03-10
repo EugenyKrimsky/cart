@@ -1,16 +1,64 @@
+import basket from "../state/basket";
 import BasketProduct from "./BasketProduct";
 import Good from "./Good";
 
 export default class StoreProduct extends Good{
   constructor(id, name, price) {
     super(id, name, price);
-    this.btn = document.createElement('button');
-    this.btn.innerText = 'Add';
-    this.btn.addEventListener('click', this.add.bind(this))
+    this.card = document.createElement('div');
+    this.inBasket = false;
+
+    this.addBtn = document.createElement('button');
+    this.addBtn.innerText = 'Add';
+    this.addBtn.addEventListener('click', this.add.bind(this));
+
+    this.minusBtn = document.createElement('button');
+    this.minusBtn.innerText = 'Minus';
+    this.minusBtn.addEventListener('click', this.minus.bind(this));
+    
+      
+  }
+  isInBasket() {
+    return basket.products.some(el => el.id === this.id);
   }
   add() {
-    let good = new BasketProduct(this.id, this.name, this.price);
-    return good.getCard();
-  }
+    if (!this.isInBasket()) {
+      this.inBasket = true;
+      const good = new BasketProduct(this.id, this.name, this.price);
+      basket.products.push(good);
+      good.createCard();
 
+      this.card.append(this.minusBtn);
+    } else {
+      basket.products.forEach(el => {
+        if (el.id === this.id) {
+          el.quantity++;
+          el.changeQuantity();
+        }
+      })
+    }  
+
+  }
+  minus() {
+    basket.products.forEach(el => {
+      if (el.id === this.id) {
+        if (el.quantity - 1 === 0) {
+           this.minusBtn.remove();
+           el.removeCard();
+           basket.products.forEach((el, i) => {
+             if (el.id === this.id) {
+               basket.products.splice(i, 1);
+             }
+           });
+           console.log(basket.products);
+          } else {
+            el.quantity--;
+            el.changeQuantity();
+            console.log(basket.products);
+          }
+        }
+    })
+    
+  }
 }
+

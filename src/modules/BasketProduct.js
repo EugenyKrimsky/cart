@@ -1,3 +1,4 @@
+import basket from "../state/basket";
 import Good from "./Good";
 
 export default class BasketProduct extends Good {
@@ -5,12 +6,18 @@ export default class BasketProduct extends Good {
     super(id, name, price);
     this.quantity = 1;
     this.card = document.createElement('div');
-    
+    this.basketElement = document.querySelector('.basket');
   }
-  getCard() {
-    this.card.append(`<h3>${this.name}</h3> <span>${this.price} ${this.quantity}</span>`)
+  createCard() {
+    this.card.innerHTML = `<h3>${this.name}</h3> <span>${this.price}</span> <strong id="price">${this.quantity}</strong>`;
     this.card.classList.add('good');
-    return this.card;
-    
+    this.basketElement.append(this.card);    
+  }
+  changeQuantity() {
+    const price = this.card.querySelector('#price');
+    price.innerHTML = this.quantity;
+  }
+  removeCard() {
+    this.card.innerHTML = '';
   }
 }

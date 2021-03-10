@@ -1,10 +1,12 @@
+import './styles/index.scss'
 import StoreProduct from "./modules/StoreProduct";
-import store from "./store/store";
+import store from "./state/store";
 
 const app = document.createElement('div');
 app.classList.add('app')
 
 const localStore =  [];
+window.localStore = localStore;
 
 // creating store
 const storeBlock = document.createElement('div');
@@ -19,11 +21,9 @@ for (let product of store.products) {
 document.querySelector('#root').append(app);
 
 for (let el of localStore) {
-  const goodEl = document.createElement('div');
-  goodEl.classList.add('good');
-  goodEl.innerHTML = `<h3>${el.name}</h3> <span>${el.price}</span> `;
-  goodEl.append(el.btn)
-  storeBlock.append(goodEl)
+  el.card.innerHTML = `<h3>${el.name}</h3> <span>${el.price}</span> `;
+  el.card.append(el.addBtn);
+  storeBlock.append(el.card);
 }
 
 //creating basket
