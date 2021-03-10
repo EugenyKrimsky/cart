@@ -5,7 +5,6 @@ import Good from "./Good";
 export default class StoreProduct extends Good{
   constructor(id, name, price) {
     super(id, name, price);
-    this.card = document.createElement('div');
     this.inBasket = false;
 
     this.addBtn = document.createElement('button');

@@ -5,7 +5,6 @@ export default class BasketProduct extends Good {
   constructor(id, name, price) {
     super(id, name, price);
     this.quantity = 1;
-    this.card = document.createElement('div');
     this.basketElement = document.querySelector('.basket');
     this.totalPrice = document.querySelector('.sum_price_busket');
   }

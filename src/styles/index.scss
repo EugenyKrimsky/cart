@@ -1,4 +1,18 @@
 .app {
-  display: grid;
-  grid-template: 1fr / 1fr 1fr;
+  text-align: center;
+}
+.store, .basket {
+  display: flex;
+  justify-content: center;
+  column-gap: 20px;
+}
+.good {
+  width: 200px;
+  height: 200px;
+  border: 1px solid rgb(184, 184, 184);
+  border-radius: 5px;
+}
+.total_price_block {
+  font-size: 20px;
+  font-weight: bold;
 }
